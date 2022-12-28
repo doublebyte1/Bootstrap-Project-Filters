@@ -273,7 +273,7 @@ var projectSettings = {
             "sources": ["ogc-api-features"],
             "maturity": "Mature",
             "type": "geo"
-          }, 
+          }, /*
         {
             "itemIdentifier": "blog",
             "status": "Valid",
@@ -736,6 +736,6 @@ var projectSettings = {
                 "display_name": "GitHub",
                 "url": "https://github.com/James231/Wordsearch-Solver-Python"
             }]
-        }
+        }*/
     ]
 }

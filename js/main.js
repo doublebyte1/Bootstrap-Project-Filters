@@ -1,3 +1,6 @@
+
+
+
 function BadgePressed() {
     $("a#" + this.id).toggleClass("down");
 
@@ -53,6 +56,7 @@ $(document).ready(function() {
     $('.project-label').click(BadgePressed);
     $('#project-label-all').click(AllBadgePressed);
     $('#project-label-none').click(NoneBadgePressed);
+
     LoadProjectsFromJson(projectSettings);
 });
 
@@ -71,7 +75,7 @@ function findLabel(labelId, newProject, badgeParent){
         var content = document.createTextNode(label.display_name);
         labelLink.appendChild(content);
         labelLink.id = "label-" + labelId;
-        labelLink.setAttribute("for", newProject.name);
+        labelLink.setAttribute("for", newProject.itemIdentifier.replaceAll(".","-")/*newProject.itemIdentifier*/);
         labelLink.classList.add("project-label");
         labelLink.classList.add("proj-label-" + labelId);
         $(labelLink).click(BadgePressed);
@@ -114,62 +118,74 @@ function LoadProjectsFromJson(projectSettings) {
         document.getElementById("label-container").appendChild(badge);
     }
 
-    // Then add projects
-    for (i = 0; i < projectSettings.projects.length; i++) {
-        var newProject = projectSettings.projects[i];
-        // Create div containing project
-        var bigParent = document.createElement("div");
-        bigParent.classList.add("project");
-        bigParent.classList.add("col-12");
-        bigParent.classList.add("col-xl-6");
-        bigParent.id = newProject.name;
-        var parent = document.createElement("div");
-        parent.classList.add("project-block");
-        bigParent.appendChild(parent);
-        // Create a containing title
-        var title = document.createElement("a");
-        title.href = newProject.title_link;
-        title.setAttribute("target", "_blank");
-        title.classList.add("project-title");
-        var titleContent = document.createTextNode(newProject.name);
-        title.appendChild(titleContent);
-        parent.appendChild(title);
-        // Create div containing links
-        var linksParent = document.createElement("div");
-        linksParent.classList.add("proj-small-link-parent");
+    // Read blocks from register.json
+    $.getJSON("./register.json", function(json) {
+        console.log(json.length);
+            // Then add projects
+        for (i = 0; i < json.length; i++) {
+            var newProject = json[i];
+            // Create div containing project
+            var bigParent = document.createElement("div");
+            bigParent.classList.add("project");
+            bigParent.classList.add("col-12");
+            bigParent.classList.add("col-xl-6");
+            //bigParent.id = newProject.itemIdentifier;
+            bigParent.id = newProject.itemIdentifier.replaceAll(".","-");
 
-        var link = document.createElement("a");
-        link.href = newProject.link;
-        link.setAttribute("target", "_blank");
-        link.classList.add("proj-small-link");
-        var linkContent = document.createTextNode("Details");
-        link.appendChild(linkContent);
-        linksParent.appendChild(link);
-        
-        parent.appendChild(linksParent);
-       // Create p containing description
-        var description = document.createElement("a");
-        description.classList.add("project-text");
-        var descriptionContent = document.createTextNode(newProject.abstract);
-        description.appendChild(descriptionContent);
-        parent.appendChild(description);
-        // Create div containing label badges
-        var badgeParent = document.createElement("div");
-        badgeParent.classList.add("label-container");
-        for (j = 0; j < newProject.sources.length; j++) {
-            var labelId = newProject.sources[j];
-            //var label;
-            //console.log(labelId);
-            findLabel(labelId, newProject, badgeParent);
+            console.log(bigParent.id);
+
+            var parent = document.createElement("div");
+            parent.classList.add("project-block");
+            bigParent.appendChild(parent);
+            // Create a containing title
+            var title = document.createElement("a");
+            title.href = newProject.title_link;
+            title.setAttribute("target", "_blank");
+            title.classList.add("project-title");
+            var titleContent = document.createTextNode(newProject.name);
+            title.appendChild(titleContent);
+            parent.appendChild(title);
+            // Create div containing links
+            var linksParent = document.createElement("div");
+            linksParent.classList.add("proj-small-link-parent");
+
+            var link = document.createElement("a");
+            link.href = newProject.link;
+            link.setAttribute("target", "_blank");
+            link.classList.add("proj-small-link");
+            var linkContent = document.createTextNode("Details");
+            link.appendChild(linkContent);
+            linksParent.appendChild(link);
+            
+            parent.appendChild(linksParent);
+        // Create p containing description
+            var description = document.createElement("a");
+            description.classList.add("project-text");
+            var descriptionContent = document.createTextNode(newProject.abstract);
+            description.appendChild(descriptionContent);
+            parent.appendChild(description);
+            // Create div containing label badges
+            var badgeParent = document.createElement("div");
+            badgeParent.classList.add("label-container");
+            for (j = 0; j < newProject.sources.length; j++) {
+                var labelId = newProject.sources[j];
+                //var label;
+                //console.log(labelId);
+                findLabel(labelId, newProject, badgeParent);
+            }
+            //console.log(newProject.status);
+            findLabel(newProject.status, newProject, badgeParent);
+            findLabel(newProject.maturity, newProject, badgeParent);
+            findLabel(newProject.type, newProject, badgeParent);
+            parent.appendChild(badgeParent);
+            // Add project to html
+            document.getElementById("projects-parent").appendChild(bigParent);
         }
-        //console.log(newProject.status);
-        findLabel(newProject.status, newProject, badgeParent);
-        findLabel(newProject.maturity, newProject, badgeParent);
-        findLabel(newProject.type, newProject, badgeParent);
-        parent.appendChild(badgeParent);
-        // Add project to html
-        document.getElementById("projects-parent").appendChild(bigParent);
-    }
+
+
+    });
+
+
 
 
 }
