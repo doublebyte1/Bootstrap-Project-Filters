@@ -1,11 +1,48 @@
 var projectSettings = {
     "labels": [{
-            "id": "csharp",
-            "display_name": "C#",
+            "id": "valid",
+            "display_name": "valid",
             "hex_color": "#178600",
             "hex_hover_color": "#32a852",
             "is_label_font_white": true
         },
+        {
+            "id": "mature",
+            "display_name": "mature",
+            "hex_color": "#2330e8",
+            "hex_hover_color": "#6b73ed",
+            "is_label_font_white": true
+        },
+        {
+            "id": "ogc-api-features",
+            "display_name": "ogc api features",
+            "hex_color": "#c97900",
+            "hex_hover_color": "#e8ad54",
+            "is_label_font_white": true
+        },        
+        {
+            "id": "ogc-api-edr",
+            "display_name": "ogc ap edr",
+            "hex_color": "#beffba",
+            "hex_hover_color": "#8bc487",
+            "is_label_font_white": false
+        },
+        {
+            "id": "geo",
+            "display_name": "geo",
+            "hex_color": "#bdb32f",
+            "hex_hover_color": "#cfc651",
+            "is_label_font_white": true
+        },        
+        {
+            "id": "ogc-utils",
+            "display_name": "ogc-utils",
+            "hex_color": "#1f97ed",
+            "hex_hover_color": "#74bef2",
+            "is_label_font_white": true
+        },        
+
+/*
         {
             "id": "go",
             "display_name": "Go",
@@ -215,20 +252,37 @@ var projectSettings = {
             "hex_color": "#3a404a",
             "hex_hover_color": "#555a63",
             "is_label_font_white": true
-        }
+        }*/
     ],
-    "projects": [{
-            "id": "blog",
+    "projects": [
+
+/*         {
+            "itemIdentifier": "r1.geo.features.resource.features",
+            "name": "Features",
+            "abstract": "The features in an OGC Collection. This resource supports spatial filtering with the bbox parameter, temporal filtering with the datetime parameter.",
+            "status": "Valid",
+            "dateTimeAddition": "2022-05-24T14:56:51+00:00",
+            "itemClass": "ogc-building-block",
+            "register": "ogc-building-block-register",
+            "version": "0.1",
+            "dateOfLastChange": "2022-05-24",
+            "link": "https://github.com/opengeospatial/bblocks/blob/master/registereditems/geo/features/json-features.adoc",
+            "sources": ["ogc-api-features"],
+            "maturity": "Mature"
+          }, */
+
+
+        {
+            "itemIdentifier": "blog",
             "title_link": "https://blog.jam-es.com/",
-            "display_name": "Blog",
-            "description": "My blog for a range of academic and programming related content.",
-            "icon": "https://www.blogger.com/img/logo_blogger_40px.png",
+            "name": "Blog",
+            "abstract": "My blog for a range of academic and programming related content.",
             "labels": ["website"],
             "links": [{
-                "display_name": "Website",
-                "url": "https://blog.jam-es.com/"
+                "name": "Details",
+                "url": "https://github.com/opengeospatial/bblocks/blob/master/registereditems/geo/features/json-features.adoc"
             }]
-        },
+        }/*,
         {
             "id": "start-menu-manager",
             "title_link": "https://start-menu-manager.jam-es.com/",
@@ -682,6 +736,6 @@ var projectSettings = {
                 "display_name": "GitHub",
                 "url": "https://github.com/James231/Wordsearch-Solver-Python"
             }]
-        }
+        }*/
     ]
 }

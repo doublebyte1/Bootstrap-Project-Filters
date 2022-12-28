@@ -95,74 +95,36 @@ function LoadProjectsFromJson(projectSettings) {
         bigParent.classList.add("project");
         bigParent.classList.add("col-12");
         bigParent.classList.add("col-xl-6");
-        bigParent.id = newProject.id;
+        bigParent.id = newProject.itemIdentifier;
         var parent = document.createElement("div");
         parent.classList.add("project-block");
         bigParent.appendChild(parent);
-        if (!newProject.icon) {
-            // Create a containing title
-            var title = document.createElement("a");
-            title.href = newProject.title_link;
-            title.setAttribute("target", "_blank");
-            title.classList.add("project-title");
-            var titleContent = document.createTextNode(newProject.display_name);
-            title.appendChild(titleContent);
-            parent.appendChild(title);
-            // Create div containing links
-            var linksParent = document.createElement("div");
-            linksParent.classList.add("proj-small-link-parent");
-            for (j = 0; j < newProject.links.length; j++) {
-                var newLink = newProject.links[j];
-                var link = document.createElement("a");
-                link.href = newLink.url;
-                link.setAttribute("target", "_blank");
-                link.classList.add("proj-small-link");
-                var linkContent = document.createTextNode(newLink.display_name);
-                link.appendChild(linkContent);
-                linksParent.appendChild(link);
-            }
-            parent.appendChild(linksParent);
-        } else {
-            // do same with icon
-            var horizFlex = document.createElement("div");
-            horizFlex.classList.add("project-title-flex-container");
-            var image = document.createElement("img");
-            image.setAttribute("src", newProject.icon);
-            image.classList.add("project-icon");
-            image.setAttribute("width", "48");
-            image.setAttribute("height", "48");
-            horizFlex.appendChild(image);
-            var titleDiv = document.createElement("div");
-            // Create a containing title
-            var title = document.createElement("a");
-            title.href = newProject.title_link;
-            title.setAttribute("target", "_blank");
-            title.classList.add("project-title");
-            var titleContent = document.createTextNode(newProject.display_name);
-            title.appendChild(titleContent);
-            titleDiv.appendChild(title);
-            // Create div containing links
-            var linksParent = document.createElement("div");
-            linksParent.classList.add("proj-small-link-parent");
-            for (j = 0; j < newProject.links.length; j++) {
-                var newLink = newProject.links[j];
-                var link = document.createElement("a");
-                link.href = newLink.url;
-                link.setAttribute("target", "_blank");
-                link.classList.add("proj-small-link");
-                var linkContent = document.createTextNode(newLink.display_name);
-                link.appendChild(linkContent);
-                linksParent.appendChild(link);
-            }
-            titleDiv.appendChild(linksParent);
-
-            horizFlex.appendChild(titleDiv);
-            parent.appendChild(horizFlex);
+        // Create a containing title
+        var title = document.createElement("a");
+        title.href = newProject.title_link;
+        title.setAttribute("target", "_blank");
+        title.classList.add("project-title");
+        var titleContent = document.createTextNode(newProject.name);
+        title.appendChild(titleContent);
+        parent.appendChild(title);
+        // Create div containing links
+        var linksParent = document.createElement("div");
+        linksParent.classList.add("proj-small-link-parent");
+        for (j = 0; j < newProject.links.length; j++) {
+            var newLink = newProject.links[j];
+            var link = document.createElement("a");
+            link.href = newLink.url;
+            link.setAttribute("target", "_blank");
+            link.classList.add("proj-small-link");
+            var linkContent = document.createTextNode(newLink.name);
+            link.appendChild(linkContent);
+            linksParent.appendChild(link);
         }
-        // Create p containing description
+        parent.appendChild(linksParent);
+       // Create p containing description
         var description = document.createElement("a");
         description.classList.add("project-text");
-        var descriptionContent = document.createTextNode(newProject.description);
+        var descriptionContent = document.createTextNode(newProject.abstract);
         description.appendChild(descriptionContent);
         parent.appendChild(description);
         // Create div containing label badges
@@ -184,7 +146,7 @@ function LoadProjectsFromJson(projectSettings) {
                 var content = document.createTextNode(label.display_name);
                 labelLink.appendChild(content);
                 labelLink.id = "label-" + labelId;
-                labelLink.setAttribute("for", newProject.id);
+                labelLink.setAttribute("for", newProject.itemIdentifier);
                 labelLink.classList.add("project-label");
                 labelLink.classList.add("proj-label-" + labelId);
                 $(labelLink).click(BadgePressed);
