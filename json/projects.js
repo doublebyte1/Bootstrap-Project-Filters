@@ -1,13 +1,13 @@
 var projectSettings = {
     "labels": [{
-            "id": "valid",
+            "id": "Valid",
             "display_name": "valid",
             "hex_color": "#178600",
             "hex_hover_color": "#32a852",
             "is_label_font_white": true
         },
         {
-            "id": "mature",
+            "id": "Mature",
             "display_name": "mature",
             "hex_color": "#2330e8",
             "hex_hover_color": "#6b73ed",
@@ -254,9 +254,12 @@ var projectSettings = {
             "is_label_font_white": true
         }*/
     ],
+
+
+
     "projects": [
 
-/*         {
+         {
             "itemIdentifier": "r1.geo.features.resource.features",
             "name": "Features",
             "abstract": "The features in an OGC Collection. This resource supports spatial filtering with the bbox parameter, temporal filtering with the datetime parameter.",
@@ -268,22 +271,18 @@ var projectSettings = {
             "dateOfLastChange": "2022-05-24",
             "link": "https://github.com/opengeospatial/bblocks/blob/master/registereditems/geo/features/json-features.adoc",
             "sources": ["ogc-api-features"],
-            "maturity": "Mature"
-          }, */
+            "maturity": "Mature",
+            "type": "geo"
+          }, 
         {
             "itemIdentifier": "blog",
-            "title_link": "https://blog.jam-es.com/",
+            "status": "Valid",
+            "maturity": "Mature",
             "name": "Blog",
             "abstract": "My blog for a range of academic and programming related content.",
-            "labels": ["website"],
             "link": "https://github.com/opengeospatial/bblocks/blob/master/registereditems/geo/features/json-features.adoc",
             "sources": ["ogc-api-features"],
-            /*
-            "links": [{
-                "name": "Details",
-                "url": "https://github.com/opengeospatial/bblocks/blob/master/registereditems/geo/features/json-features.adoc"
-            }]*/
-        }/*,
+        },
         {
             "id": "start-menu-manager",
             "title_link": "https://start-menu-manager.jam-es.com/",
@@ -737,6 +736,6 @@ var projectSettings = {
                 "display_name": "GitHub",
                 "url": "https://github.com/James231/Wordsearch-Solver-Python"
             }]
-        }*/
+        }
     ]
 }

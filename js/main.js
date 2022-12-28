@@ -41,6 +41,8 @@ function NoneBadgePressed() {
             var projectId = this.getAttribute("for");
             var hasClass = $("#" + projectId).hasClass("project-hidden");
             if (!hasClass) {
+                console.log("has class hidden");
+                //console.log("#" + projectId);
                 $("#" + projectId).addClass("project-hidden");
             }
         }
@@ -69,7 +71,7 @@ function findLabel(labelId, newProject, badgeParent){
         var content = document.createTextNode(label.display_name);
         labelLink.appendChild(content);
         labelLink.id = "label-" + labelId;
-        labelLink.setAttribute("for", newProject.itemIdentifier);
+        labelLink.setAttribute("for", newProject.name);
         labelLink.classList.add("project-label");
         labelLink.classList.add("proj-label-" + labelId);
         $(labelLink).click(BadgePressed);
@@ -120,7 +122,7 @@ function LoadProjectsFromJson(projectSettings) {
         bigParent.classList.add("project");
         bigParent.classList.add("col-12");
         bigParent.classList.add("col-xl-6");
-        bigParent.id = newProject.itemIdentifier;
+        bigParent.id = newProject.name;
         var parent = document.createElement("div");
         parent.classList.add("project-block");
         bigParent.appendChild(parent);
@@ -157,9 +159,13 @@ function LoadProjectsFromJson(projectSettings) {
         for (j = 0; j < newProject.sources.length; j++) {
             var labelId = newProject.sources[j];
             //var label;
-            console.log(labelId);
+            //console.log(labelId);
             findLabel(labelId, newProject, badgeParent);
         }
+        //console.log(newProject.status);
+        findLabel(newProject.status, newProject, badgeParent);
+        findLabel(newProject.maturity, newProject, badgeParent);
+        findLabel(newProject.type, newProject, badgeParent);
         parent.appendChild(badgeParent);
         // Add project to html
         document.getElementById("projects-parent").appendChild(bigParent);
