@@ -54,6 +54,31 @@ $(document).ready(function() {
     LoadProjectsFromJson(projectSettings);
 });
 
+function findLabel(labelId, newProject, badgeParent){
+    var label = '';
+    var labelFound = false;
+    for (k = 0; k < projectSettings.labels.length; k++) {
+        if (projectSettings.labels[k].id == labelId) {
+            labelFound = true;
+            label = projectSettings.labels[k];
+            break;
+        }
+    }
+    if (labelFound) {
+        var labelLink = document.createElement("a");
+        var content = document.createTextNode(label.display_name);
+        labelLink.appendChild(content);
+        labelLink.id = "label-" + labelId;
+        labelLink.setAttribute("for", newProject.itemIdentifier);
+        labelLink.classList.add("project-label");
+        labelLink.classList.add("proj-label-" + labelId);
+        $(labelLink).click(BadgePressed);
+        badgeParent.appendChild(labelLink);
+    }
+
+
+}
+
 function LoadProjectsFromJson(projectSettings) {
 
     // First build up the new CSS classes for badge button colours
@@ -110,16 +135,15 @@ function LoadProjectsFromJson(projectSettings) {
         // Create div containing links
         var linksParent = document.createElement("div");
         linksParent.classList.add("proj-small-link-parent");
-        for (j = 0; j < newProject.links.length; j++) {
-            var newLink = newProject.links[j];
-            var link = document.createElement("a");
-            link.href = newLink.url;
-            link.setAttribute("target", "_blank");
-            link.classList.add("proj-small-link");
-            var linkContent = document.createTextNode(newLink.name);
-            link.appendChild(linkContent);
-            linksParent.appendChild(link);
-        }
+
+        var link = document.createElement("a");
+        link.href = newProject.link;
+        link.setAttribute("target", "_blank");
+        link.classList.add("proj-small-link");
+        var linkContent = document.createTextNode("Details");
+        link.appendChild(linkContent);
+        linksParent.appendChild(link);
+        
         parent.appendChild(linksParent);
        // Create p containing description
         var description = document.createElement("a");
@@ -130,31 +154,16 @@ function LoadProjectsFromJson(projectSettings) {
         // Create div containing label badges
         var badgeParent = document.createElement("div");
         badgeParent.classList.add("label-container");
-        for (j = 0; j < newProject.labels.length; j++) {
-            var labelId = newProject.labels[j];
-            var label;
-            var labelFound = false;
-            for (k = 0; k < projectSettings.labels.length; k++) {
-                if (projectSettings.labels[k].id == labelId) {
-                    labelFound = true;
-                    label = projectSettings.labels[k];
-                    break;
-                }
-            }
-            if (labelFound) {
-                var labelLink = document.createElement("a");
-                var content = document.createTextNode(label.display_name);
-                labelLink.appendChild(content);
-                labelLink.id = "label-" + labelId;
-                labelLink.setAttribute("for", newProject.itemIdentifier);
-                labelLink.classList.add("project-label");
-                labelLink.classList.add("proj-label-" + labelId);
-                $(labelLink).click(BadgePressed);
-                badgeParent.appendChild(labelLink);
-            }
+        for (j = 0; j < newProject.sources.length; j++) {
+            var labelId = newProject.sources[j];
+            //var label;
+            console.log(labelId);
+            findLabel(labelId, newProject, badgeParent);
         }
         parent.appendChild(badgeParent);
         // Add project to html
         document.getElementById("projects-parent").appendChild(bigParent);
     }
+
+
 }

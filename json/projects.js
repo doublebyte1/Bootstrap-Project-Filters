@@ -270,18 +270,19 @@ var projectSettings = {
             "sources": ["ogc-api-features"],
             "maturity": "Mature"
           }, */
-
-
         {
             "itemIdentifier": "blog",
             "title_link": "https://blog.jam-es.com/",
             "name": "Blog",
             "abstract": "My blog for a range of academic and programming related content.",
             "labels": ["website"],
+            "link": "https://github.com/opengeospatial/bblocks/blob/master/registereditems/geo/features/json-features.adoc",
+            "sources": ["ogc-api-features"],
+            /*
             "links": [{
                 "name": "Details",
                 "url": "https://github.com/opengeospatial/bblocks/blob/master/registereditems/geo/features/json-features.adoc"
-            }]
+            }]*/
         }/*,
         {
             "id": "start-menu-manager",
