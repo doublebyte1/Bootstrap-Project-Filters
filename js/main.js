@@ -139,7 +139,7 @@ function LoadProjectsFromJson(projectSettings) {
             bigParent.appendChild(parent);
             // Create a containing title
             var title = document.createElement("a");
-            title.href = newProject.title_link;
+            title.href = newProject.link;
             title.setAttribute("target", "_blank");
             title.classList.add("project-title");
             var titleContent = document.createTextNode(newProject.name);
